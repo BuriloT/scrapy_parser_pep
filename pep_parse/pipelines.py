@@ -13,10 +13,7 @@ class PepParsePipeline:
     def process_item(self, item, spider):
         self.total_peps += 1
         status = item['status']
-        if status in self.status_sum:
-            self.status_sum[status] += 1
-        if status not in self.status_sum:
-            self.status_sum[status] = 1
+        self.status_sum[status] = self.status_sum.get(status, 0) + 1
         return item
 
     def close_spider(self, spider):
